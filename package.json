@@ -1,0 +1,54 @@
+{
+  "name": "express-verifier",
+  "version": "0.1.0",
+  "description": "express-verifier ================",
+  "main": "index.js",
+  "scripts": {
+    "test_jshint": "node_modules/.bin/grunt jshint",
+    "test_unit": "node_modules/.bin/nodeunit tests/",
+    "test_unit_cov": "EXPRESSVERIFIER_COV=1 node_modules/.bin/nodeunit --reporter=lcov tests/",
+    "jscov": "node_modules/.bin/jscoverage lib",
+    "test": "npm run test_jshint && npm run test_unit",
+    "coveralls": "npm run jscov && npm run test_unit_cov | node_modules/.bin/coveralls"
+  },
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "node-verifier-schema": "*"
+  },
+  "devDependencies": {
+    "async": "~0.9.0",
+    "colors": "~1.0.3",
+    "nodeunit": "~0.9.0",
+    "grunt": "~0.4.5",
+    "grunto": "~1.2.1",
+    "grunt-contrib-jshint": "~0.10.0",
+    "jscoverage": "~0.5.9",
+    "grunt-cli": "~0.1.13",
+    "coveralls": "~2.11.2",
+    "nodeunit-httpclient": "~0.2.1",
+    "express": "~4.10.6",
+    "body-parser": "~1.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://aliaksandr-pasynkau@github.com/aliaksandr-pasynkau/express-verifier.git"
+  },
+  "keywords": [
+    "express",
+    "verifier",
+    "validator",
+    "body",
+    "params",
+    "query",
+    "check",
+    "checker",
+    "verify",
+    "schema"
+  ],
+  "author": "aliaksandr-pasynkau",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aliaksandr-pasynkau/express-verifier/issues"
+  },
+  "homepage": "https://github.com/aliaksandr-pasynkau/express-verifier"
+}
