@@ -6,3 +6,9 @@ exports['check nodeunit'] = {
 		test.done();
 	}
 };
+
+exports[''] = {
+	'': function () {
+
+	}
+};
