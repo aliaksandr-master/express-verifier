@@ -7,8 +7,8 @@ exports['check nodeunit'] = {
 	}
 };
 
-exports[''] = {
-	'': function () {
-
-	}
-};
+//exports[''] = {
+//	'': function () {
+//
+//	}
+//};
