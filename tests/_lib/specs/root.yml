@@ -1,8 +1,6 @@
 ---
 schema:
-    params:
-        =:
-            - type object
+    body:
         first_name:
             - type string
             - min_length 3
@@ -15,4 +13,14 @@ schema:
             - type string
             - min_length 3
             - max_length 20
+    params:
+        id:
+            - type: string
+            - format: ^\d+$
+    query:
+        orderby?:
+            - type: string
+            - contains:
+                - ASC
+                - DESC
 
