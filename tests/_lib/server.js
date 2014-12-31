@@ -33,9 +33,9 @@ app.get('/', verify('root.yml'), resource);
 
 app.post('/(:id)/', verify('root.yml'), resource);
 
-app.get('/some/', verify.query(function (schema) {
-	schema.required('sortby', ['type string', {'contains': ['key', 'value']}]);
-	schema.optional('orderby', ['type string', {'contains': ['ASC', 'DESC']}]);
+app.get('/some/', verify.query(function (required, optional) {
+	required('sortby', ['type string', {'contains': ['key', 'value']}]);
+	optional('orderby', ['type string', {'contains': ['ASC', 'DESC']}]);
 }), resource);
 
 app.use(function (err, req, res, next) {
