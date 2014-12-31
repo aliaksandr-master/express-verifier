@@ -1,5 +1,7 @@
 "use strict";
 
+var _ = require('lodash');
+require('colors');
 var Schema = require('node-verifier-schema');
 var plugin = require('./index');
 
@@ -10,27 +12,33 @@ var bodyParser = require('body-parser');
 var app = express();
 
 var verify = plugin({
-	preparePath: function (filepath) {
-		return __dirname + '/specs/' + filepath;
-	}
+	cwd: __dirname + '/specs/'
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/', verify('root.yml'), function (req, res) {
-	console.log('get:', 123123);
-	res.send({done: req.body});
-});
+var resource = function (req, res) {
+	res.send({
+		done: {
+			body: req.body,
+			query: req.query,
+			params: req.params,
+			headers: req.headers
+		}
+	});
+};
 
-app.post('/(:id)/', verify('root.yml'), function (req, res) {
-	console.log('post:', 123123);
-	res.send({done: req.body});
-});
+app.get('/', verify('root.yml'), resource);
+
+app.post('/(:id)/', verify('root.yml'), resource);
+
+app.get('/some/', verify.query(function (schema) {
+	schema.required('sortby', ['type string', {'contains': ['key', 'value']}]);
+	schema.optional('orderby', ['type string', {'contains': ['ASC', 'DESC']}]);
+}), resource);
 
 app.use(function (err, req, res, next) {
-	console.log(req.method, req.url, err);
-
 	if (err instanceof Schema.ValidationError) {
 		res.send({
 			error: err
@@ -42,10 +50,7 @@ app.use(function (err, req, res, next) {
 });
 
 var server = app.listen(3000, function () {
-	var host = server.address().address;
-	var port = server.address().port;
-
-	console.log('Example app listening at http://%s:%s', host, port);
+	console.log('>>'.green, 'Server started at ' + ('http://' + server.address().address + ':' + server.address().port).red);
 });
 
 module.exports = app;
