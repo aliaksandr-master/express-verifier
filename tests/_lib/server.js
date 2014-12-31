@@ -53,4 +53,15 @@ var server = app.listen(3000, function () {
 	console.log('>>'.green, 'Server started at ' + ('http://' + server.address().address + ':' + server.address().port).red);
 });
 
+
+// use httpie !!!
+// valid
+// http GET "http://localhost:3000/some/?sortby=key&orderby=ASC" --json --body
+// http GET http://localhost:3000/some/?sortby=key
+// echo '{"first_name": "Vasia", "last_name": "Pupkin"}' | http POST http://localhost:3000/123/ content-type:application/json  --json --body
+
+// invalid
+// http GET "http://localhost:3000/some/?sortby=key&orderby=123" --json --body
+
+
 module.exports = app;
