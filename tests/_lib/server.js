@@ -1,17 +1,14 @@
 "use strict";
 
-var _ = require('lodash');
 require('colors');
-var Schema = require('node-verifier-schema');
-var plugin = require('./index');
+var _ = require('lodash');
 
 var express = require('express');
-
 var bodyParser = require('body-parser');
-
+var verifier = require('./index');
 var app = express();
 
-var verify = plugin({
+var verify = verifier({
 	cwd: __dirname + '/specs/'
 });
 
@@ -37,7 +34,7 @@ app.get('/', verify.query(function (required, optional) {
 app.post('/(:id)/', verify('root.yml'), resource);
 
 app.use(function (err, req, res, next) {
-	if (err instanceof Schema.ValidationError) {
+	if (err instanceof verifier.Schema.ValidationError) {
 		res.status(400);
 		res.send({
 			error: err
