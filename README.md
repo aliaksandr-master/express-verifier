@@ -10,7 +10,9 @@ express-verifier
 
 body, params, query verifier middleware for express framework (nodejs)
 
-all rules see https://www.npmjs.com/package/express-verifier
+all rules see https://www.npmjs.com/package/node-verifier
+
+schema declaration see https://www.npmjs.com/package/node-verifier-schema
 
 ```js
 var express = require('express');
