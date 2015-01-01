@@ -1,6 +1,6 @@
 {
   "name": "express-verifier",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "express-verifier ================",
   "main": "index.js",
   "scripts": {
