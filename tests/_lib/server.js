@@ -29,17 +29,16 @@ var resource = function (req, res) {
 	});
 };
 
-app.get('/', verify('root.yml'), resource);
-
-app.post('/(:id)/', verify('root.yml'), resource);
-
-app.get('/some/', verify.query(function (required, optional) {
+app.get('/', verify.query(function (required, optional) {
 	required('sortby', ['type string', {'contains': ['key', 'value']}]);
 	optional('orderby', ['type string', {'contains': ['ASC', 'DESC']}]);
 }), resource);
 
+app.post('/(:id)/', verify('root.yml'), resource);
+
 app.use(function (err, req, res, next) {
 	if (err instanceof Schema.ValidationError) {
+		res.status(400);
 		res.send({
 			error: err
 		});
@@ -49,9 +48,11 @@ app.use(function (err, req, res, next) {
 	next(err);
 });
 
-var server = app.listen(3000, function () {
-	console.log('>>'.green, 'Server started at ' + ('http://' + server.address().address + ':' + server.address().port).red);
-});
+if(!module.parent) {
+	var server = app.listen(3000, function () {
+		console.log('>>'.green, 'Server started at ' + ('http://' + server.address().address + ':' + server.address().port).red);
+	});
+}
 
 
 // use httpie !!!
