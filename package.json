@@ -12,6 +12,7 @@
     "coveralls": "npm run jscov && npm run test_unit_cov | node_modules/.bin/coveralls"
   },
   "dependencies": {
+    "async-iterate": "^0.1.3",
     "lodash": "~2.4.1",
     "node-verifier-schema": "~0.8.4"
   },
