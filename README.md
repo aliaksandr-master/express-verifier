@@ -8,6 +8,8 @@
 express-verifier
 ================
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aliaksandr-pasynkau/express-verifier?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 body, params, query verifier middleware for express framework (nodejs)
 
 all rules see https://www.npmjs.com/package/node-verifier
