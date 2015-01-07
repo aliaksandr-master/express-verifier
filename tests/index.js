@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var app = require('./_lib/server');
-var tester = require('./_lib/tester')({
+var tester = require('nodeunit-express/tester')({
 	prepare: function (res) {
 		res.body = JSON.parse(res.body);
 		return res;
