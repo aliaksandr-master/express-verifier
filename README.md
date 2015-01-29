@@ -133,3 +133,21 @@ app.get('/(:id)/', verifier.params(schemaParams), verifier.body(schemaBody), ver
 	// ...
 });
 ```
+# Add new custom rules
+see https://github.com/aliaksandr-pasynkau/node-verifier for more information
+
+```js
+var Rule = require('express-verifier').Schema.Verifier.Rule;
+
+var HasNotEdgeWhitespaces = Rule.extend({
+	check: function (value, params, done) {
+		if (typeof value === 'string') {
+			return new this.ValidationError('type', 'string');
+		}
+
+		return value === value.trim();
+	}
+});
+
+Rule.add('has_not_edge_whitespaces', HasNotEdgeWhitespaces);
+```
