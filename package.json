@@ -1,6 +1,6 @@
 {
   "name": "express-verifier",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "input (params, query, headers, body) verifying middleware (connect/expressjs)",
   "main": "index.js",
   "scripts": {
