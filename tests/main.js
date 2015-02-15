@@ -33,5 +33,33 @@ exports['initialize'] = function (test) {
 		verify.query('schema1');
 	});
 
+	var req = {
+		query: {},
+		params: {},
+		body: {}
+	};
+	var res = {};
+	var next = function () {};
+
+	test.doesNotThrow(function () {
+		verify({
+			query: new Schema(),
+			params: new Schema(),
+			body: new Schema()
+		}, function (err, req, res, next) {})(req, res, next);
+	});
+
+	test.doesNotThrow(function () {
+		verify.query('schema1', function (err, req, res, next) {})(req, res, next);
+	});
+
+	test.doesNotThrow(function () {
+		verify.params('schema1', function (err, req, res, next) {})(req, res, next);
+	});
+
+	test.doesNotThrow(function () {
+		verify.body('schema1', function (err, req, res, next) {})(req, res, next);
+	});
+
 	test.done();
 };
