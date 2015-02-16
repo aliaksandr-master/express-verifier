@@ -1,12 +1,7 @@
 "use strict";
 
-var _ = require('lodash');
-require('colors');
 var Schema = require('node-verifier-schema');
 var plugin = require('./_lib/index');
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
 
 var verify = plugin();
 
