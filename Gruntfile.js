@@ -2,9 +2,13 @@
 
 module.exports = require('grunto')(function(grunt) {
 
+	grunt.registerTask('test', [
+		'newer:eslint',
+		'nodeunit'
+	]);
+
 	grunt.registerTask('default', [
-		'newer:jshint:all',
-		'nodeunit',
+		'test',
 		'watch'
 	]);
 
@@ -12,28 +16,24 @@ module.exports = require('grunto')(function(grunt) {
 		nodeunit: {
 			all: [
 				'tests/*.js'
-			],
-			options: {
-			}
+			]
 		},
-		'jshint': {
-			options: grunt.file.readJSON('.jshintrc'),
+		eslint: {
 			all: [
 				'**/*.{js,json}',
-				'!node_modules/**/*.{js,json}',
-				'!lib-cov/**/*.{js,json}'
+				'!node_modules/**/*',
+				'!lib-cov/**/*'
 			]
 		},
 		watch: {
 			files: [
-				'lib/**/*',
-				'tests/**/*'
+				'lib/**/*.{js,json}',
+				'!node_modules/**/*',
+				'!lib-cov/**/*'
 			],
 			tasks: [
-				'newer:jshint:all',
-				'nodeunit'
+				'test'
 			]
 		}
 	};
-
 });
