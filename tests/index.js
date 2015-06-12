@@ -1,6 +1,5 @@
-"use strict";
+'use strict';
 
-var _ = require('lodash');
 var app = require('./_lib/server');
 var tester = require('nodeunit-express/tester')({
 	prepare: function (res) {
@@ -36,7 +35,7 @@ exports['get /'] = {
 					rule: 'contains',
 					params: [ 'key', 'value' ],
 					value: 'hey',
-					path: [ 'sortby' ],
+					path: ['sortby'],
 					object: 'query'
 				}
 			}
@@ -58,9 +57,9 @@ exports['get /'] = {
 				error: {
 					name: 'ValidationError',
 					rule: 'contains',
-					params: ['ASC', 'DESC'],
+					params: [ 'ASC', 'DESC' ],
 					value: 'bla',
-					path: [ 'orderby' ],
+					path: ['orderby'],
 					object: 'query'
 				}
 			}
@@ -80,8 +79,8 @@ exports['post /(:id)/'] = {
 		uri: '/123/',
 		method: 'POST',
 		body: {
-			"first_name": "Vasia",
-			"last_name": "Pupkin"
+			'first_name': 'Vasia',
+			'last_name': 'Pupkin'
 		},
 		expect: {
 			statusCode: 200
@@ -91,7 +90,7 @@ exports['post /(:id)/'] = {
 	'invalid': tester(app, {
 		uri: '/asd/',
 		method: 'POST',
-		body: { "first_name": "Vasia", "last_name": "Pupkin" },
+		body: { 'first_name': 'Vasia', 'last_name': 'Pupkin' },
 		expect: {
 			body: {
 				error: {
@@ -99,7 +98,7 @@ exports['post /(:id)/'] = {
 					rule: 'format',
 					params: '^\\d+$',
 					value: 'asd',
-					path: [ 'id' ],
+					path: ['id'],
 					object: 'params'
 				}
 			}
@@ -110,9 +109,9 @@ exports['post /(:id)/'] = {
 		uri: '/123/',
 		method: 'POST',
 		body: {
-			"first_name": "Vasia",
-			"last_name": "Pupkin",
-			"middle_name": ""
+			'first_name': 'Vasia',
+			'last_name': 'Pupkin',
+			'middle_name': ''
 		},
 		expect: {
 			body: {
@@ -121,7 +120,7 @@ exports['post /(:id)/'] = {
 					rule: 'min_length',
 					params: 3,
 					value: '',
-					path: [ 'middle_name' ],
+					path: ['middle_name'],
 					object: 'body'
 				}
 			}
@@ -132,7 +131,7 @@ exports['post /(:id)/'] = {
 		uri: '/123/',
 		method: 'POST',
 		body: {
-			"first_name": "Vasia"
+			'first_name': 'Vasia'
 		},
 		expect: {
 			body: {
@@ -140,7 +139,7 @@ exports['post /(:id)/'] = {
 					name: 'ValidationError',
 					rule: 'required',
 					params: null,
-					path: [ 'last_name' ],
+					path: ['last_name'],
 					object: 'body'
 				}
 			}
@@ -151,9 +150,9 @@ exports['post /(:id)/'] = {
 		uri: '/123/',
 		method: 'POST',
 		body: {
-			"first_name": "Vasia",
-			"last_name": "asdasd",
-			"middle_name": 12313
+			'first_name': 'Vasia',
+			'last_name': 'asdasd',
+			'middle_name': 12313
 		},
 		expect: {
 			body: {
@@ -162,7 +161,7 @@ exports['post /(:id)/'] = {
 					rule: 'type',
 					params: 'string',
 					value: 12313,
-					path: [ 'middle_name' ],
+					path: ['middle_name'],
 					object: 'body'
 				}
 			}

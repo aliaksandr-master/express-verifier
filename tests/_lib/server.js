@@ -1,15 +1,15 @@
-"use strict";
+'use strict';
+/*eslint no-console:0*/
 
 require('colors');
-var _ = require('lodash');
 
 var express = require('express');
 var bodyParser = require('body-parser');
 var verifier = require('./index');
 var app = express();
-
+var path = require('path');
 var verify = verifier({
-	cwd: __dirname + '/specs/'
+	cwd: path.join(__dirname, '/specs/')
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,8 +27,13 @@ var resource = function (req, res) {
 };
 
 app.get('/', verify.query(function (required, optional) {
-	required('sortby', ['type string', {'contains': ['key', 'value']}]);
-	optional('orderby', ['type string', {'contains': ['ASC', 'DESC']}]);
+	required('sortby', [
+		'type string', { 'contains': [ 'key', 'value' ] }
+	]);
+	optional('orderby', [
+		'type string', {
+			'contains': [ 'ASC', 'DESC' ] }
+	]);
 }), resource);
 
 app.post('/(:id)/', verify('root.yml'), resource);
@@ -45,8 +50,10 @@ app.use(function (err, req, res, next) {
 	next(err);
 });
 
-if(!module.parent) {
-	var server = app.listen(3000, function () {
+if (!module.parent) {
+	var server;
+
+	server = app.listen(3000, function () {
 		console.log('>>'.green, 'Server started at ' + ('http://' + server.address().address + ':' + server.address().port).red);
 	});
 }

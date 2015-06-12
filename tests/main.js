@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
+/*eslint no-unused-vars: 0*/
 
 var Schema = require('node-verifier-schema');
 var plugin = require('./_lib/index');
-
 var verify = plugin();
 
 var schema1 = new Schema('schema1');
 
-exports['initialize'] = function (test) {
+exports.initialize = function (test) {
 	test.throws(function () {
 		verify('schema2');
 	});
@@ -28,32 +28,35 @@ exports['initialize'] = function (test) {
 		verify.query('schema1');
 	});
 
+	var res = {};
 	var req = {
 		query: {},
 		params: {},
 		body: {}
 	};
-	var res = {};
 	var next = function () {};
+	var cbk = function (e, req, res, next) {
+
+	};
 
 	test.doesNotThrow(function () {
 		verify({
 			query: new Schema(),
 			params: new Schema(),
 			body: new Schema()
-		}, function (err, req, res, next) {})(req, res, next);
+		}, cbk)(req, res, next);
 	});
 
 	test.doesNotThrow(function () {
-		verify.query('schema1', function (err, req, res, next) {})(req, res, next);
+		verify.query('schema1', cbk)(req, res, next);
 	});
 
 	test.doesNotThrow(function () {
-		verify.params('schema1', function (err, req, res, next) {})(req, res, next);
+		verify.params('schema1', cbk)(req, res, next);
 	});
 
 	test.doesNotThrow(function () {
-		verify.body('schema1', function (err, req, res, next) {})(req, res, next);
+		verify.body('schema1', cbk)(req, res, next);
 	});
 
 	test.done();

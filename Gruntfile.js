@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-module.exports = require('grunto')(function(grunt) {
+module.exports = require('grunto')(function (grunt) {
 
 	grunt.registerTask('test', [
 		'newer:eslint',
@@ -20,14 +20,14 @@ module.exports = require('grunto')(function(grunt) {
 		},
 		eslint: {
 			all: [
-				'**/*.{js,json}',
+				'**/*.js',
 				'!node_modules/**/*',
 				'!lib-cov/**/*'
 			]
 		},
 		watch: {
 			files: [
-				'lib/**/*.{js,json}',
+				'lib/**/*.js',
 				'!node_modules/**/*',
 				'!lib-cov/**/*'
 			],
